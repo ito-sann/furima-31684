@@ -1,24 +1,61 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column   | Type   | Options     |
+| -------- | ------ | ----------- |
+| nickname | string | null: false |
+| email    | string | unique: true|
+| password | string | null: false |
+| truename | string | null: false |
+| birthday | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+-has_many :items
+-has_many :records
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column   | Type      | Options                       |
+| -------- | --------- | ----------------------------- |
+| name     | string    | null: false                   |
+| image    | string    | null: false                   |
+| text     | string    | null: false                   |
+| category | text      | null: false                   |
+| condition| string    | null: false                   |
+| burden   | string    | null: false                   |
+| region   | string    | null: false                   |
+| day      | string    | null: false                   |
+| price    | string    | null: false                   |
+| user     |references | null: false, foreign_key: true|
 
-* Database initialization
+### Association
 
-* How to run the test suite
+-belongs_to :user
+-has_one :record
 
-* Services (job queues, cache servers, search engines, etc.)
+## records テーブル
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
 
-* ...
+-belongs_to :user
+-belongs_to :item
+-belongs_to :address
+
+## addresses テーブル
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| postalcode      | string     | null: false                    |
+| prefecture      | string     | null: false                    |
+| municipality    | string     | null: false                    |
+| housenumber     | string     | null: false                    |
+| phonenumber     | string     | null: false                    |
+
+### Association
+
+-belongs_to :record
