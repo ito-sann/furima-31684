@@ -29,7 +29,7 @@
 | burden_id   | integer   | null: false                   |
 | region_id   | integer   | null: false                   |
 | day_id      | integer   | null: false                   |
-| price       | string    | null: false                   |
+| price       | integer   | null: false                   |
 | user        |references | null: false, foreign_key: true|
 
 ### Association
@@ -58,6 +58,7 @@
 | house_number    | string     | null: false                    |
 | phone_number    | string     | null: false                    |
 | building_number | string     |                                |
+| record          | references | null: false, foreign_key: true |
 
 ### Association
 
