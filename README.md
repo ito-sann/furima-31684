@@ -2,13 +2,18 @@
 
 ## users テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| nickname | string | null: false |
-| email    | string | unique: true|
-| password | string | null: false |
-| truename | string | null: false |
-| birthday | string | null: false |
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | null: false |
+| email              | string | unique: true|
+| encrypted_password | string | null: false |
+| kanji_sei_name     | string | null: false |
+| kanji_mei_name     | string | null: false |
+| furigana_sei_name  | string | null: false |
+| furigana_mei_name  | string | null: false |
+| hiragana_sei_name  | string | null: false |
+| hiragana_mei_name  | string | null: false |
+| birthday           | date   | null: false |
 
 ### Association
 
@@ -20,13 +25,12 @@
 | Column   | Type      | Options                       |
 | -------- | --------- | ----------------------------- |
 | name     | string    | null: false                   |
-| image    | string    | null: false                   |
-| text     | string    | null: false                   |
-| category | text      | null: false                   |
-| condition| string    | null: false                   |
-| burden   | string    | null: false                   |
-| region   | string    | null: false                   |
-| day      | string    | null: false                   |
+| text     | text      | null: false                   |
+| category | integer   | null: false                   |
+| condition| integer   | null: false                   |
+| burden   | integer   | null: false                   |
+| region   | integer   | null: false                   |
+| day      | integer   | null: false                   |
 | price    | string    | null: false                   |
 | user     |references | null: false, foreign_key: true|
 
@@ -50,11 +54,12 @@
 ## addresses テーブル
 | Column          | Type       | Options                        |
 | --------------- | ---------- | ------------------------------ |
-| postalcode      | string     | null: false                    |
-| prefecture      | string     | null: false                    |
+| postal_code     | string     | null: false                    |
+| prefecture      | integer    | null: false                    |
 | municipality    | string     | null: false                    |
-| housenumber     | string     | null: false                    |
-| phonenumber     | string     | null: false                    |
+| house_number    | string     | null: false                    |
+| phone_number    | string     | null: false                    |
+| building_number | string     |                                |
 
 ### Association
 
