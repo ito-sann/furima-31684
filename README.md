@@ -9,10 +9,8 @@
 | encrypted_password | string | null: false |
 | kanji_sei_name     | string | null: false |
 | kanji_mei_name     | string | null: false |
-| furigana_sei_name  | string | null: false |
-| furigana_mei_name  | string | null: false |
-| hiragana_sei_name  | string | null: false |
-| hiragana_mei_name  | string | null: false |
+| katakana_sei_name  | string | null: false |
+| katakana_mei_name  | string | null: false |
 | birthday           | date   | null: false |
 
 ### Association
@@ -22,17 +20,17 @@
 
 ## items テーブル
 
-| Column   | Type      | Options                       |
-| -------- | --------- | ----------------------------- |
-| name     | string    | null: false                   |
-| text     | text      | null: false                   |
-| category | integer   | null: false                   |
-| condition| integer   | null: false                   |
-| burden   | integer   | null: false                   |
-| region   | integer   | null: false                   |
-| day      | integer   | null: false                   |
-| price    | string    | null: false                   |
-| user     |references | null: false, foreign_key: true|
+| Column      | Type      | Options                       |
+| ----------- | --------- | ----------------------------- |
+| name        | string    | null: false                   |
+| text        | text      | null: false                   |
+| category_id | integer   | null: false                   |
+| condition_id| integer   | null: false                   |
+| burden_id   | integer   | null: false                   |
+| region_id   | integer   | null: false                   |
+| day_id      | integer   | null: false                   |
+| price       | string    | null: false                   |
+| user        |references | null: false, foreign_key: true|
 
 ### Association
 
@@ -49,7 +47,7 @@
 
 -belongs_to :user
 -belongs_to :item
--belongs_to :address
+-has_one :address
 
 ## addresses テーブル
 | Column          | Type       | Options                        |
