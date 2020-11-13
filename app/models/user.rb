@@ -5,13 +5,20 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   with_options presence: true do
-    validates :nickname
-    validates :kanji_sei_name, format: { with: /\A[一-龥ぁ-ん]/ }
-    validates :kanji_mei_name, format: { with: /\A[一-龥ぁ-ん]/ }
-    validates :katakana_sei_name, format: { with: /\A[ァ-ヶー－]+\z/ }
-    validates :katakana_mei_name, format: { with: /\A[ァ-ヶー－]+\z/ }
+    validates :nickname    
     validates :birthday
+    validates :password, format: {with: /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i}
   end
+
+  with_options presence: true, format: { with: /\A[一-龥ぁ-ん]/ } do
+    validates :kanji_sei_name
+    validates :kanji_mei_name
+  end 
+
+  with_options presence: true, format:  { with: /\A[ァ-ヶー－]+\z/ } do
+    validates :katakana_sei_name
+    validates :katakana_mei_name
+  end  
   has_many :items
   has_many :records
 end

@@ -9,11 +9,6 @@ describe User do
       it '9項目をすべて満たせば登録できる' do
         expect(@user).to be_valid
       end
-      it 'passwordが6文字以上でかつ一致すれば登録できる' do
-        @user.password = 'aaaaaa'
-        @user.password_confirmation = 'aaaaaa'
-        expect(@user).to be_valid
-      end
     end
 
     context '異常系 新規登録がうまくいかないとき' do
@@ -27,12 +22,27 @@ describe User do
         @user.valid?
         expect(@user.errors.full_messages).to include("Email can't be blank")
       end
+      it 'emailに@がないと登録できない' do
+        @user.email = 'aaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email is invalid")
+      end
       it '重複したemailが存在する場合登録できない' do
         @user.save
         another_user = FactoryBot.build(:user)
         another_user.email = @user.email
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+      it 'passwordが英字のみだと登録できない' do
+        @user.password = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordが数字のみだと登録できない' do
+        @user.password = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'passwordが空だと登録できない' do
         @user.password = ''
