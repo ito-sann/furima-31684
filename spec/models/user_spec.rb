@@ -25,7 +25,7 @@ describe User do
       it 'emailに@がないと登録できない' do
         @user.email = 'aaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Email is invalid")
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it '重複したemailが存在する場合登録できない' do
         @user.save
@@ -37,12 +37,12 @@ describe User do
       it 'passwordが英字のみだと登録できない' do
         @user.password = 'aaaaaa'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordが数字のみだと登録できない' do
         @user.password = '111111'
         @user.valid?
-        expect(@user.errors.full_messages).to include("Password is invalid")
+        expect(@user.errors.full_messages).to include('Password is invalid')
       end
       it 'passwordが空だと登録できない' do
         @user.password = ''
