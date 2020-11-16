@@ -3,13 +3,16 @@
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
 
   </header>
+
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, url:items_path,local: true do |f| %>
 
+
     <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
     <%= render 'shared/error_messages', model: f.object %>
     <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
+
 
     <%# 出品画像 %>
     <div class="img-upload">
@@ -25,6 +28,7 @@
       </div>
     </div>
     <%# /出品画像 %>
+
     <%# 商品名と商品説明 %>
     <div class="new-items">
       <div class="weight-bold-text">
@@ -40,7 +44,8 @@
         <%= f.text_area :text, class:"items-text", id:"item-info", placeholder:"商品の説明（必須 1,000文字まで）（色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。" ,rows:"7" ,maxlength:"1000" %>
       </div>
     </div>
-    <%# /商品名と商品説明 %>
+    <%# /商品名と商品説明 %
+    >
 
     <%# 商品の詳細 %>
     <div class="items-detail">
@@ -59,6 +64,7 @@
       </div>
     </div>
     <%# /商品の詳細 %>
+
 
     <%# 配送について %>
     <div class="items-detail">
@@ -85,6 +91,7 @@
       </div>
     </div>
     <%# /配送について %>
+
 
     <%# 販売価格 %>
     <div class="sell-price">
@@ -117,6 +124,7 @@
     </div>
     <%# /販売価格 %>
 
+
     <%# 注意書き %>
     <div class="caution">
       <p class="sentence">
@@ -136,6 +144,7 @@
       </p>
     </div>
     <%# /注意書き %>
+
     <%# 下部ボタン %>
     <div class="sell-btn-contents">
       <%= f.submit "出品する" ,class:"sell-btn" %>
@@ -144,6 +153,7 @@
     <%# /下部ボタン %>
   </div>
   <% end %>
+  
 
   <footer class="items-sell-footer">
     <ul class="menu">
