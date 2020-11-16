@@ -13,6 +13,7 @@ class Item < ApplicationRecord
     validates :image
   end
   belongs_to :user
+  has_one :record
   has_one_attached :image
 
   validates :price, numericality: { greater_than_or_equal_to: 300 }
