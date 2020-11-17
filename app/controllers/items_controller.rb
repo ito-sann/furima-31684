@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
-  before_action :set_item, only: [:show, :edit, :update]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, only: [:edit]
   def index
     @items = Item.all.order(id: 'DESC')
@@ -33,6 +33,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def destroy
+    if user_signed_in? && current_user.id == @item.user.id
+      @item.destroy
+      redirect_to root_path
+    else
+      render :index
+    end  
+  end
 
   private
 
@@ -45,6 +53,8 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user.id
+    unless user_signed_in? && current_user.id == @item.user.id
+      redirect_to action: :index
+    end  
   end
 end
