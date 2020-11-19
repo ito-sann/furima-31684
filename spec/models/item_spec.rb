@@ -4,7 +4,6 @@ RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
   end
-
   describe '商品の保存' do
     context '正常系 商品が保存できる場合' do
       it 'すべての項目を満たせば商品は保存される' do
@@ -23,7 +22,7 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it 'imageがないと商品は保存できない' do
-        @item.image = ''
+        @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
