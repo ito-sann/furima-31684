@@ -6,7 +6,7 @@ class RecordsController < ApplicationController
   def index
     @user_record = UserRecord.new
   end
-  
+
   def create
     @user_record = UserRecord.new(record_params)
     if @user_record.valid?
@@ -15,37 +15,34 @@ class RecordsController < ApplicationController
       redirect_to root_path
     else
       render action: :index
-    end 
-  end  
+    end
+  end
 
   private
-   # 全てのストロングパラメーターを1つに統合
+
+  # 全てのストロングパラメーターを1つに統合
   def record_params
-   params.permit(:postal_code, :region_id, :municipality, :house_number, :phone_number, :building_number, :item_id, :token).merge(user_id: current_user.id)
+    params.permit(:postal_code, :region_id, :municipality, :house_number, :phone_number, :building_number, :item_id, :token).merge(user_id: current_user.id)
   end
 
   def buy_item
     @item = Item.find(params[:item_id])
-  end  
+  end
 
   def same
-    if user_signed_in? && current_user.id == @item.user.id
-      redirect_to root_path
-    end  
-  end  
+    redirect_to root_path if user_signed_in? && current_user.id == @item.user.id
+  end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY'] # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
-      amount: @item.price,  # 商品の値段
+      amount: @item.price, # 商品の値段
       card: record_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
-  end 
-  
+  end
+
   def check
-    unless @item.record.nil?
-      redirect_to root_path
-    end  
-  end  
+    redirect_to root_path unless @item.record.nil?
+  end
 end

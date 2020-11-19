@@ -24,7 +24,7 @@ RSpec.describe UserRecord, type: :model do
         it 'region_idがないと商品購入と送り先は保存できない' do
           @user_record.region_id = '0'
           @user_record.valid?
-          expect(@user_record.errors.full_messages).to include("Region must be other than 0")
+          expect(@user_record.errors.full_messages).to include('Region must be other than 0')
         end
         it 'municipalityがないと商品購入と送り先は保存できない' do
           @user_record.municipality = ''
@@ -44,19 +44,19 @@ RSpec.describe UserRecord, type: :model do
         it 'postal_codeにハイフンがないと商品購入と送り先は保存できない' do
           @user_record.postal_code = '1234567'
           @user_record.valid?
-          expect(@user_record.errors.full_messages).to include("Postal code is invalid")
+          expect(@user_record.errors.full_messages).to include('Postal code is invalid')
         end
         it 'phone_numberの桁数が１１桁以内でないと商品購入と送り先は保存できない' do
           @user_record.phone_number = '123456789012'
           @user_record.valid?
-          expect(@user_record.errors.full_messages).to include("Phone number is invalid")
+          expect(@user_record.errors.full_messages).to include('Phone number is invalid')
         end
-        it "tokenが空では登録できないこと" do
+        it 'tokenが空では登録できないこと' do
           @user_record.token = nil
           @user_record.valid?
           expect(@user_record.errors.full_messages).to include("Token can't be blank")
         end
-      end    
+      end
     end
   end
-end    
+end

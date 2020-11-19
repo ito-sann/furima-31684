@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
       redirect_to root_path
     else
       render :index
-    end  
+    end
   end
 
   private
@@ -53,8 +53,6 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in? && current_user.id == @item.user.id
-      redirect_to action: :index
-    end  
+    redirect_to action: :index unless user_signed_in? && current_user.id == @item.user.id
   end
 end
