@@ -1,6 +1,8 @@
 class RecordsController < ApplicationController
-
+  before_action :authenticate_user!
   before_action :buy_item, only: [:index, :create]
+  before_action :check, only: [:index, :create]
+  before_action :same, only: [:index, :create]
   def index
     @user_record = UserRecord.new
   end
@@ -26,6 +28,12 @@ class RecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end  
 
+  def same
+    if user_signed_in? && current_user.id == @item.user.id
+      redirect_to root_path
+    end  
+  end  
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を記述しましょう
     Payjp::Charge.create(
@@ -33,5 +41,11 @@ class RecordsController < ApplicationController
       card: record_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end 
+  
+  def check
+    unless @item.record.nil?
+      redirect_to root_path
+    end  
   end  
 end
