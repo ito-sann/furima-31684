@@ -11,7 +11,11 @@ RSpec.describe UserRecord, type: :model do
     end
     describe '商品の保存' do
       context '正常系 商品購入と送り先が保存できる場合' do
-        it 'すべての項目を満たせば商品は保存される' do
+        it 'すべての項目を満たせば商品購入と送り先は保存される' do
+          expect(@user_record).to be_valid
+        end
+        it 'building_numberがなくても商品購入と送り先は保存される' do
+          @user_record.building_number = ''
           expect(@user_record).to be_valid
         end
       end
