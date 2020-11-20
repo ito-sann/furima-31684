@@ -26,7 +26,7 @@ RSpec.describe UserRecord, type: :model do
           expect(@user_record.errors.full_messages).to include("Postal code can't be blank")
         end
         it 'region_idがないと商品購入と送り先は保存できない' do
-          @user_record.region_id = '0'
+          @user_record.region_id = 0
           @user_record.valid?
           expect(@user_record.errors.full_messages).to include('Region must be other than 0')
         end
